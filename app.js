@@ -5,12 +5,13 @@ const COMPUTER_SCIENCE = [
 
 const MATHEMATICS = []
 const LINGUISTICS = []
-const ENGINEERING = []
 
 
-var Classes = React.createClass({
+//this component should be generic enough to render
+// course details from any department
+var CS = React.createClass({
     render: function(){
-       var details = this.props.course.map(function(c){
+       var details = this.props.cs.map(function(c){
             return(
                     <div>
                         <span>       
@@ -50,17 +51,16 @@ var DeptMenu = React.createClass({
         return (
             <div className="dept-menu">
                 <div className="form-group">
-                    <label htmlFor="depts">Search course by department: </label>
+                    <label htmlFor="depts">Search courses by department: </label>
                             <select className="form-control" onChange={this.props.changeDept}>
                                 <option>Computer Science</option>
                                 <option>Mathematics</option>
                                 <option>Linguistics</option>
-                                <option>Engineering</option>
                             </select> 
                         </div>
                     <br/>
                 <span>Department chosen: {this.props.dept} - {summary}</span>
-                {this.props.dept==='Computer Science' ? <Classes course={this.props.course}/> : ' meow'}
+                {this.props.dept==='Computer Science' ? <CS cs={this.props.cs}/> : ' meow'}
             </div>
         )
     }
@@ -82,7 +82,7 @@ var ClassRegistration = React.createClass({
                         <DeptMenu
                             dept={this.state.dept}
                             changeDept={this.changeDept}
-                            course={this.props.course}/>
+                            cs={this.props.cs}/>
                     </div>
                 </div>
             </div>
@@ -90,4 +90,4 @@ var ClassRegistration = React.createClass({
     }
 })
 
-ReactDOM.render(<ClassRegistration course={COMPUTER_SCIENCE}/>, document.getElementById('app'))
+ReactDOM.render(<ClassRegistration cs={COMPUTER_SCIENCE} ma={MATHEMATICS} ling={LINGUISTICS}/>, document.getElementById('app'))
