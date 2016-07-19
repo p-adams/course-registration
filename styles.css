@@ -1,0 +1,27 @@
+.class-reg{
+    border: 5px solid blue;
+    height: 100vh;
+}
+.dept-menu{
+    border: 1px solid red;
+}
+.classes{
+    border: 1px solid green;
+}
+h1{
+    text-align: left;
+}
+.form-control{
+    width: 200px !important;
+}
+table{
+    width: 100%;
+}
+table, tr, td{
+    border: 1px solid black;    
+}
+td{
+    width: 180px;
+    text-align: center;
+}
+
