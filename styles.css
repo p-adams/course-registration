@@ -1,6 +1,6 @@
 .class-reg{
     border: 5px solid blue;
-    height: 100vh;
+    height: 100%;
 }
 .dept-menu{
     border: 1px solid red;
@@ -14,14 +14,26 @@ h1{
 .form-control{
     width: 200px !important;
 }
+.btn-default{
+    margin: 5px;
+}
 table{
     width: 100%;
 }
-table, tr, td{
+table, tr{
     border: 1px solid black;    
 }
 td{
-    width: 180px;
+    width: 145px;
     text-align: center;
+    border: 1px dotted red;
+}
+th{
+    border: 1px solid purple;
+    width: 125px;
+    padding: 10px;
+}
+.course-details{
+    border: 1px solid orange;
 }
 

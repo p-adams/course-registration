@@ -1,40 +1,52 @@
 const COMPUTER_SCIENCE = [
-    {id: 1, num: 1234,  name: 'Intro to Programming', time: '11:40AM', days: 'MWTRF', seats: 35, enrolled: false}
+    {id: 1, num: 1234,  name: 'Intro to Programming', credits: 4, time: '11:40AM', days: 'MWTRF', seats: 35, enrolled: false},
+    {id: 2, num: 1235,  name: 'Programming Languages', credits: 3, time: '4:00PM', days: 'MWF', seats: 25, enrolled: false},
+    {id: 3, num: 1236,  name: 'Data Structures', credits: 3, time: '12:10PM', days: 'MWTR', seats: 35, enrolled: false},
+    {id: 4, num: 1237,  name: 'Algorithm Design and Analysis', credits: 4, time: '10:00AM', days: 'MWTRF', seats: 25, enrolled: false},
+    {id: 5, num: 1238,  name: 'Machine Learning',  credits: 3, time: '11:50AM', days: 'MWF', seats: 25, enrolled: false}
     
 ]
 
 const MATHEMATICS = [
-    {id: 1, num: 2234,  name: 'Linear Algebra', time: '4:00AM', days: 'MWF', seats: 35, enrolled: false}
+    {id: 1, num: 2234,  name: 'Linear Algebra', credit: 4, time: '4:00AM', days: 'MWF', seats: 35, enrolled: false}
 ]
 const LINGUISTICS = []
 
-
-//this component should be generic enough to render
-// course details from any department
 var CS = React.createClass({
     render: function(){
-       var details = this.props.cs.map(function(c){
+       var details = this.props.cs.map(function( c){
             return(
-                    <div>
-                        <span>       
-                            <td>{c.num}</td>
-                            <td>{c.name}</td>
-                            <td>{c.time}</td>
-                            <td>{c.days}</td>
-                            <td>{c.seats}</td>
-                            <button>Drop</button>
-                            <button>Add</button>
-                        </span>
-                    </div>
+                    <tr key={c.id}className="course-details">        
+                        <td key={1}>{c.num}</td>
+                        <td key={2}>{c.name}</td>
+                        <td key={3}>{c.credits}</td>
+                        <td key={4}>{c.time}</td>
+                        <td key={5}>{c.days}</td>
+                        <td key={6}>{c.seats}</td>
+                        <td>
+                        <button className="btn btn-default">Drop</button>
+                        <button className="btn btn-default">Add</button>
+                        </td>
+                    </tr>
                     )
        })
         return (
             <div className="classes">
                 <h4>Classes</h4>
                 <table>
-                <tr>
-                    {details}
-                </tr>
+                    <thead>
+                    <tr>
+                        <th>Course #</th>
+                        <th>Course name</th>
+                        <th>Credit hours</th>
+                        <th>Time</th>
+                        <th>Days</th>
+                        <th>Seats available</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {details}
+                    </tbody>
                 </table>
             </div>
         )
@@ -62,14 +74,7 @@ var Mathematics = React.createClass({
 })
 
 var DeptMenu = React.createClass({
-    showSummary: function(){
-        var dept = this.props.dept
-        return dept === 'Computer Science' ? ' Data Structures and Algorithms' :
-        dept === 'Mathematics' ? ' Algebra and Calculus' : dept === 'Linguistics' ?
-        ' Morphology and Syntax' : dept === 'Engineering' ? 'Thermodynamics and Physics' : null
-    },
     render: function(){
-        var summary = this.showSummary()
         return (
             <div className="dept-menu">
                 <div className="form-group">
@@ -81,7 +86,7 @@ var DeptMenu = React.createClass({
                             </select> 
                         </div>
                     <br/>
-                <span>Department chosen: {this.props.dept} - {summary}</span>
+               
                 {this.props.dept==='Computer Science' ? <ComputerScience cs={this.props.cs}/> :
                 this.props.dept==='Mathematics' ? <Mathematics cs={this.props.ma}/> : ' meow'
                 }
