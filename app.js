@@ -1,16 +1,30 @@
 const COMPUTER_SCIENCE = [
-    {id: 1, num: 1234,  name: 'Intro to Programming', credits: 4, time: '11:40AM', days: 'MWTRF', seats: 35, enrolled: false},
-    {id: 2, num: 1235,  name: 'Programming Languages', credits: 3, time: '4:00PM', days: 'MWF', seats: 25, enrolled: false},
-    {id: 3, num: 1236,  name: 'Data Structures', credits: 3, time: '12:10PM', days: 'MWTR', seats: 35, enrolled: false},
-    {id: 4, num: 1237,  name: 'Algorithm Design and Analysis', credits: 4, time: '10:00AM', days: 'MWTRF', seats: 25, enrolled: false},
-    {id: 5, num: 1238,  name: 'Machine Learning',  credits: 3, time: '11:50AM', days: 'MWF', seats: 25, enrolled: false}
+    {id: 1, num: 1234,  name: 'Intro to Programming', credits: 4, time: '11:40AM', days: 'M-W-TR-F', seats: 35, enrolled: false},
+    {id: 2, num: 1235,  name: 'Programming Languages', credits: 3, time: '4:00PM', days: 'M-W-F', seats: 25, enrolled: false},
+    {id: 3, num: 1236,  name: 'Data Structures', credits: 3, time: '12:10PM', days: 'M-W-TR', seats: 35, enrolled: false},
+    {id: 4, num: 1237,  name: 'Algorithm Design and Analysis', credits: 4, time: '10:00AM', days: 'M-W-TR-F', seats: 25, enrolled: false},
+    {id: 5, num: 1238,  name: 'Machine Learning',  credits: 3, time: '11:50AM', days: 'M-W-F', seats: 25, enrolled: false}
     
 ]
 
 const MATHEMATICS = [
-    {id: 1, num: 2234,  name: 'Linear Algebra', credit: 4, time: '4:00AM', days: 'MWF', seats: 35, enrolled: false}
+    {id: 6, num: 2234,  name: 'Linear Algebra', credits: 4, time: '4:00PM', days: 'M-T-W-F', seats: 20, enrolled: false},
+    {id: 7, num: 2235,  name: 'Calculus 1', credits: 4, time: '1:00PM', days: 'M-W-TR-F', seats: 35, enrolled: false},
+    {id: 8, num: 2236,  name: 'Calculus 2', credits: 4, time: '3:50PM', days: 'T-W-TR-F', seats: 35, enrolled: false},
+    {id: 9, num: 2237,  name: 'Probability', credits: 3, time: '9:00AM', days: 'M-W-F', seats: 25, enrolled: false},
+    {id: 10, num: 2238,  name: 'Differential Geometry', credits: 4, time: '11:15AM', days: 'M-T-W-F', seats: 15, enrolled: false},
+    {id: 11, num: 2239,  name: 'Differential Equations', credits: 3, time: '11:45AM', days: 'M-W-F', seats: 15, enrolled: false}
 ]
-const LINGUISTICS = []
+const LINGUISTICS = [
+
+    {id: 12, num: 3234,  name: 'Introduction to Linguistics', credits: 4, time: '5:00PM', days: 'M-T-W-F', seats: 35, enrolled: false},
+    {id: 13, num: 3235,  name: 'Morphology', credits: 3, time: '1:00PM', days: 'M-W-T-F', seats: 15, enrolled: false},
+    {id: 14, num: 3236,  name: 'Phonology', credits: 3, time: '3:50PM', days: 'T-W-TR', seats: 15, enrolled: false},
+    {id: 15, num: 3237,  name: 'Syntax', credits: 4, time: '9:00AM', days: 'M-T-W-F', seats: 25, enrolled: false},
+    {id: 16, num: 3238,  name: 'Analysis of Literature', credits: 4, time: '10:15AM', days: 'M-T-W-F', seats: 25, enrolled: false},
+    {id: 17, num: 3239,  name: 'Modern English Grammar', credits: 3, time: '3:45PM', days: 'M-W-F', seats: 35, enrolled: false}
+
+]
 
 var CS = React.createClass({
     render: function(){
@@ -73,6 +87,16 @@ var Mathematics = React.createClass({
     }
 })
 
+var Linguistics = React.createClass({
+    render: function(){
+        return (
+            <div>
+                <CS cs={this.props.cs}/>
+            </div>
+        )
+    }
+})
+
 var DeptMenu = React.createClass({
     render: function(){
         return (
@@ -88,7 +112,7 @@ var DeptMenu = React.createClass({
                     <br/>
                
                 {this.props.dept==='Computer Science' ? <ComputerScience cs={this.props.cs}/> :
-                this.props.dept==='Mathematics' ? <Mathematics cs={this.props.ma}/> : ' meow'
+                this.props.dept==='Mathematics' ? <Mathematics cs={this.props.ma}/> : <Linguistics cs={this.props.ling}/>
                 }
             </div>
         )
