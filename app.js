@@ -3,7 +3,9 @@ const COMPUTER_SCIENCE = [
     
 ]
 
-const MATHEMATICS = []
+const MATHEMATICS = [
+    {id: 1, num: 2234,  name: 'Linear Algebra', time: '4:00AM', days: 'MWF', seats: 35, enrolled: false}
+]
 const LINGUISTICS = []
 
 
@@ -39,6 +41,26 @@ var CS = React.createClass({
     }
 })
 
+var ComputerScience = React.createClass({
+    render: function(){
+        return (
+            <div>
+                <CS cs={this.props.cs}/> 
+            </div>
+        )
+    }
+})
+
+var Mathematics = React.createClass({
+    render: function(){
+        return (
+            <div>
+                <CS cs={this.props.cs}/>
+            </div>
+        )
+    }
+})
+
 var DeptMenu = React.createClass({
     showSummary: function(){
         var dept = this.props.dept
@@ -60,7 +82,9 @@ var DeptMenu = React.createClass({
                         </div>
                     <br/>
                 <span>Department chosen: {this.props.dept} - {summary}</span>
-                {this.props.dept==='Computer Science' ? <CS cs={this.props.cs}/> : ' meow'}
+                {this.props.dept==='Computer Science' ? <ComputerScience cs={this.props.cs}/> :
+                this.props.dept==='Mathematics' ? <Mathematics cs={this.props.ma}/> : ' meow'
+                }
             </div>
         )
     }
@@ -82,7 +106,9 @@ var ClassRegistration = React.createClass({
                         <DeptMenu
                             dept={this.state.dept}
                             changeDept={this.changeDept}
-                            cs={this.props.cs}/>
+                            cs={this.props.cs}
+                            ma={this.props.ma}
+                            ling={this.props.ling}/>
                     </div>
                 </div>
             </div>
