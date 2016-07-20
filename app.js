@@ -145,8 +145,8 @@ var DeptMenu = React.createClass({
 var Schedule = React.createClass({
     render: function(){
         console.log(this.props.schedule)
-        var schedule = this.props.schedule.map(function(index, s){
-            return (<li key={index}>{s.course}</li>)
+        var schedule = this.props.schedule.map(function(s, index){
+            return (<li key={index}>{s.time}</li>)
         })
         
         return (
@@ -171,15 +171,15 @@ var ClassRegistration = React.createClass({
         })
     },
     addClass: function(c){
-         var details =  {
+         var details =  [{
             course: c.name, 
             credits: c.credits,
             time: c.time,
             days: c.days,
             enrolled: true
-        }
-        this.setState({schedule: this.state.schedule.concat(details)})
-        //alert('Class: ' + details.course)
+        }]
+        
+    this.setState({schedule: this.state.schedule.concat(details)})
     },
     render: function(){
       
