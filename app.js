@@ -26,6 +26,10 @@ const LINGUISTICS = [
 
 ]
 
+var thStyle = {
+    textAlign: 'center'
+}
+
 var CS = React.createClass({
     render: function(){
        var details = this.props.cs.map(function( c){
@@ -67,6 +71,16 @@ var CS = React.createClass({
     }
 })
 
+var Home = React.createClass({
+    render: function(){
+        return (
+            <div>
+                <h3>Register for Fall classes now!</h3>
+            </div>
+        )
+    }
+})
+
 var ComputerScience = React.createClass({
     render: function(){
         return (
@@ -102,8 +116,9 @@ var DeptMenu = React.createClass({
         return (
             <div className="dept-menu">
                 <div className="form-group">
-                    <label htmlFor="depts">Search courses by department: </label>
+                    <label htmlFor="depts">Offered this Fall: </label>
                             <select className="form-control" onChange={this.props.changeDept}>
+                                <option>Select department</option>
                                 <option>Computer Science</option>
                                 <option>Mathematics</option>
                                 <option>Linguistics</option>
@@ -111,7 +126,7 @@ var DeptMenu = React.createClass({
                         </div>
                     <br/>
                
-                {this.props.dept==='Computer Science' ? <ComputerScience cs={this.props.cs}/> :
+                {this.props.dept === 'Select department' ? <Home/> : this.props.dept==='Computer Science' ? <ComputerScience cs={this.props.cs}/> :
                 this.props.dept==='Mathematics' ? <Mathematics cs={this.props.ma}/> : <Linguistics cs={this.props.ling}/>
                 }
             </div>
@@ -120,7 +135,7 @@ var DeptMenu = React.createClass({
 })
 var ClassRegistration = React.createClass({
     getInitialState: function(){
-        return {dept: 'Computer Science'}
+        return {dept: 'Select department'}
     },
     changeDept: function(e){
         this.setState({dept: e.target.value})

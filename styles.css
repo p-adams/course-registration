@@ -7,6 +7,7 @@
 }
 .classes{
     border: 1px solid green;
+    background-color: white;
 }
 h1{
     text-align: left;
@@ -31,6 +32,7 @@ td{
 th{
     border: 1px solid purple;
     width: 125px;
+    text-align: center;
     padding: 10px;
 }
 .course-details{
