@@ -26,12 +26,9 @@ const LINGUISTICS = [
 
 ]
 
-var thStyle = {
-    textAlign: 'center'
-}
-
 var CS = React.createClass({
     render: function(){
+        var self = this
        var details = this.props.cs.map(function( c){
             return(
                     <tr key={c.id}className="course-details">        
@@ -42,8 +39,16 @@ var CS = React.createClass({
                         <td key={5}>{c.days}</td>
                         <td key={6}>{c.seats}</td>
                         <td>
-                        <button className="btn btn-default">Drop</button>
-                        <button className="btn btn-default">Add</button>
+                        <button
+                            className="btn btn-default"
+                            disabled={c.enrolled===false}
+                        >
+                        Drop</button>
+                        <button 
+                            onClick={self.props.add.bind(null, c)}
+                            className="btn btn-default"
+                        >
+                        Add</button>
                         </td>
                     </tr>
                     )
@@ -85,7 +90,7 @@ var ComputerScience = React.createClass({
     render: function(){
         return (
             <div>
-                <CS cs={this.props.cs}/> 
+                <CS add={this.props.add} cs={this.props.cs}/> 
             </div>
         )
     }
@@ -95,7 +100,7 @@ var Mathematics = React.createClass({
     render: function(){
         return (
             <div>
-                <CS cs={this.props.cs}/>
+                <CS add={this.props.add} cs={this.props.cs}/>
             </div>
         )
     }
@@ -105,13 +110,18 @@ var Linguistics = React.createClass({
     render: function(){
         return (
             <div>
-                <CS cs={this.props.cs}/>
+                <CS add={this.props.add} cs={this.props.cs}/>
             </div>
         )
     }
 })
 
 var DeptMenu = React.createClass({
+    showOptions: function(){
+        var option = this.props.dept
+        return this.props.dept === 'Select department' ? <Home/> : this.props.dept==='Computer Science' ? <ComputerScience add={this.props.add} cs={this.props.cs}/> :
+                this.props.dept==='Mathematics' ? <Mathematics add={this.props.add} cs={this.props.ma}/> : <Linguistics add={this.props.add} cs={this.props.ling}/>
+    },
     render: function(){
         return (
             <div className="dept-menu">
@@ -126,30 +136,64 @@ var DeptMenu = React.createClass({
                         </div>
                     <br/>
                
-                {this.props.dept === 'Select department' ? <Home/> : this.props.dept==='Computer Science' ? <ComputerScience cs={this.props.cs}/> :
-                this.props.dept==='Mathematics' ? <Mathematics cs={this.props.ma}/> : <Linguistics cs={this.props.ling}/>
-                }
+                {this.showOptions()}
             </div>
         )
     }
 })
+
+var Schedule = React.createClass({
+    render: function(){
+        console.log(this.props.schedule)
+        var schedule = this.props.schedule.map(function(index, s){
+            return (<li key={index}>{s.course}</li>)
+        })
+        
+        return (
+            <div className="schedule">
+            <h4>Your Fall semester schedule</h4>
+                <ul>
+                    {schedule}
+                </ul>
+            </div>
+        )
+    }
+})
+
+
 var ClassRegistration = React.createClass({
     getInitialState: function(){
-        return {dept: 'Select department'}
+        return {dept: 'Select department', schedule: []}
     },
     changeDept: function(e){
-        this.setState({dept: e.target.value})
+        this.setState({
+            dept: e.target.value
+        })
+    },
+    addClass: function(c){
+         var details =  {
+            course: c.name, 
+            credits: c.credits,
+            time: c.time,
+            days: c.days,
+            enrolled: true
+        }
+        this.setState({schedule: this.state.schedule.concat(details)})
+        //alert('Class: ' + details.course)
     },
     render: function(){
       
         return (
             <div className="class-reg">
-                <h1>FooBar University</h1><hr/>
+            <h1>FooBar University</h1><hr/>
                 <div className="container">
+                <Schedule schedule={this.state.schedule}/>
                     <div className="jumbotron">
+                        
                         <DeptMenu
                             dept={this.state.dept}
                             changeDept={this.changeDept}
+                            add={this.addClass}
                             cs={this.props.cs}
                             ma={this.props.ma}
                             ling={this.props.ling}/>
