@@ -9,6 +9,9 @@
     border: 1px solid green;
     background-color: white;
 }
+.schedule{
+    border: 1px solid brown;
+}
 h1{
     text-align: left;
 }
@@ -29,10 +32,10 @@ td{
     text-align: center;
     border: 1px dotted red;
 }
-th{
+html body table th{
     border: 1px solid purple;
     width: 125px;
-    text-align: center !important;
+    text-align: center;
     padding: 10px;
 }
 .course-details{
