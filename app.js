@@ -156,7 +156,6 @@ var DeptMenu = React.createClass({
 var Schedule = React.createClass({
     render: function(){
         var self = this
-        //console.log(this.props.schedule)
         var schedule = this.props.schedule.map(function(s, index){
             return (
                 <tr key={index}>
@@ -166,13 +165,12 @@ var Schedule = React.createClass({
                     <td>
                         <button
                             className="btn btn-default"
-                            onClick={self.props.drop.bind(null, index)}
+                            onClick={self.props.drop.bind(null, self.props.schedule)}
                           >
                         Drop</button></td>
                 </tr>
                 )
-        })
-        
+        }) 
         return (
             <div className="schedule">
             <h4>Your Fall semester schedule</h4>
@@ -203,12 +201,13 @@ var ClassRegistration = React.createClass({
             time: c.time,
             days: c.days,
             enrolled: true
-        }]
-        
+        }]   
     this.setState({schedule: this.state.schedule.concat(details)})
     },
-    dropClass: function(index){
-        this.setState({schedule: this.state.schedule.splice(0,1)})
+    dropClass: function(course){
+       var courses = this.state.schedule
+       courses.splice(courses.indexOf(course), 1)
+       this.setState({courses : courses})
     },
     render: function(){ 
         return (
