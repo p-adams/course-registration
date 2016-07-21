@@ -26,6 +26,16 @@ const LINGUISTICS = [
 
 ]
 
+//clicking add should disable button so you can't add same course twice.
+//The seats should decrement by one when adding a class.
+//droping a class should resotre the seats amount
+/*
+    problems: I have two children components that need access to each other's data?
+    DeptMenu has to see if add button is clicked, if so, disabled. Take 1 from seats.
+    Schedule has to restore the seat count for that particular class, 
+    and also re-active add button.
+*/
+
 var CS = React.createClass({
     render: function(){
         var self = this
@@ -38,8 +48,7 @@ var CS = React.createClass({
                         <td key={4}>{c.time}</td>
                         <td key={5}>{c.days}</td>
                         <td key={6}>{c.seats}</td>
-                        <td>
-                        
+                        <td>                   
                         <button 
                             onClick={self.props.add.bind(null, c)}
                             className="btn btn-default"
@@ -165,7 +174,7 @@ var Schedule = React.createClass({
                     <td>
                         <button
                             className="btn btn-default"
-                            onClick={self.props.drop.bind(null, self.props.schedule)}
+                            onClick={self.props.drop.bind(null, s)}
                           >
                         Drop</button></td>
                 </tr>
