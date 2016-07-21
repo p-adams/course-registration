@@ -1,19 +1,24 @@
 .class-reg{
-    border: 5px solid blue;
+    border: 5px solid white;
     height: 100%;
 }
 .dept-menu{
-    border: 1px solid red;
+    border: 1px solid white;
 }
 .classes{
-    border: 1px solid green;
+    border: 1px solid white;
     background-color: white;
 }
 .schedule{
-    border: 1px solid brown;
+    border: 1px solid white;
+}
+.title{
+    background-color: white;
+   
 }
 h1{
     text-align: left;
+    color: darkslateblue !important;
 }
 .form-control{
     width: 200px !important;
@@ -25,20 +30,20 @@ table{
     width: 100%;
 }
 table, tr{
-    border: 1px solid black;    
+    border: 1px solid gray;    
 }
 td{
     width: 145px;
     text-align: center;
-    border: 1px dotted red;
+    border: 1px dotted gray;
 }
 html body table th{
-    border: 1px solid purple;
+    border: 1px solid gray;
     width: 125px;
     text-align: center;
     padding: 10px;
 }
 .course-details{
-    border: 1px solid orange;
+    border: 1px solid gray;
 }
 
