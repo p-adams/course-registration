@@ -29,7 +29,7 @@ const LINGUISTICS = [
 var CS = React.createClass({
     render: function(){
         var self = this
-       var details = this.props.cs.map(function( c){
+        var details = this.props.cs.map(function( c){
             return(
                     <tr key={c.id}className="course-details">        
                         <td key={1}>{c.num}</td>
@@ -39,11 +39,7 @@ var CS = React.createClass({
                         <td key={5}>{c.days}</td>
                         <td key={6}>{c.seats}</td>
                         <td>
-                        <button
-                            className="btn btn-default"
-                            disabled={c.enrolled===false}
-                        >
-                        Drop</button>
+                        
                         <button 
                             onClick={self.props.add.bind(null, c)}
                             className="btn btn-default"
@@ -90,7 +86,11 @@ var ComputerScience = React.createClass({
     render: function(){
         return (
             <div>
-                <CS add={this.props.add} cs={this.props.cs}/> 
+                <CS
+                    schedule={this.props.schedule}
+                    add={this.props.add}
+                    cs={this.props.cs}
+                /> 
             </div>
         )
     }
@@ -119,8 +119,19 @@ var Linguistics = React.createClass({
 var DeptMenu = React.createClass({
     showOptions: function(){
         var option = this.props.dept
-        return this.props.dept === 'Select department' ? <Home/> : this.props.dept==='Computer Science' ? <ComputerScience add={this.props.add} cs={this.props.cs}/> :
-                this.props.dept==='Mathematics' ? <Mathematics add={this.props.add} cs={this.props.ma}/> : <Linguistics add={this.props.add} cs={this.props.ling}/>
+        return this.props.dept === 'Select department' ? <Home/> :
+            this.props.dept==='Computer Science' ?
+            <ComputerScience
+                schedule={this.props.schedule}
+                add={this.props.add}
+                cs={this.props.cs}/> :
+            this.props.dept==='Mathematics' ? 
+            <Mathematics 
+                add={this.props.add}
+                cs={this.props.ma}/> : 
+            <Linguistics 
+                add={this.props.add}
+                cs={this.props.ling}/>
     },
     render: function(){
         return (
@@ -144,17 +155,32 @@ var DeptMenu = React.createClass({
 
 var Schedule = React.createClass({
     render: function(){
-        console.log(this.props.schedule)
+        var self = this
+        //console.log(this.props.schedule)
         var schedule = this.props.schedule.map(function(s, index){
-            return (<li key={index}>{s.time}</li>)
+            return (
+                <tr key={index}>
+                    <td key={1}>{s.course}</td>
+                    <td key={2}>{s.time}</td>
+                    <td key={3}>{s.days}</td>
+                    <td>
+                        <button
+                            className="btn btn-default"
+                            onClick={self.props.drop.bind(null, index)}
+                          >
+                        Drop</button></td>
+                </tr>
+                )
         })
         
         return (
             <div className="schedule">
             <h4>Your Fall semester schedule</h4>
-                <ul>
+            <table>
+            <thead>
                     {schedule}
-                </ul>
+            </thead>
+            </table>
             </div>
         )
     }
@@ -181,19 +207,24 @@ var ClassRegistration = React.createClass({
         
     this.setState({schedule: this.state.schedule.concat(details)})
     },
-    render: function(){
-      
+    dropClass: function(index){
+        this.setState({schedule: this.state.schedule.splice(0,1)})
+    },
+    render: function(){ 
         return (
             <div className="class-reg">
             <h1>FooBar University</h1><hr/>
                 <div className="container">
-                <Schedule schedule={this.state.schedule}/>
-                    <div className="jumbotron">
-                        
+                <Schedule
+                    schedule={this.state.schedule}
+                    drop={this.dropClass}
+                    />
+                    <div className="jumbotron">      
                         <DeptMenu
                             dept={this.state.dept}
                             changeDept={this.changeDept}
                             add={this.addClass}
+                            schedule={this.state.schedule}
                             cs={this.props.cs}
                             ma={this.props.ma}
                             ling={this.props.ling}/>
